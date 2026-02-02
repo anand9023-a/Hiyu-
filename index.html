@@ -3,115 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day, Hiyu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>For Hiyu</title>
     <style>
-        body {
+        /* --- Reset & Base Variables --- */
+        :root {
+            --bg-color: #121212;      /* Deep charcoal/black */
+            --text-color: #E0E0E0;    /* Soft off-white */
+            --accent-color: #D4A5A5;  /* Dusty pink */
+            --card-bg: #1E1E1E;       /* Slightly lighter dark for contrast if needed */
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000000; /* Deep charcoal/black */
-            color: #f5f5dc; /* Beige */
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+            box-sizing: border-box;
         }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 2rem 1rem;
+        }
+
+        /* --- Container --- */
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            width: 100%;
             text-align: center;
         }
-        h1, h2, h3, p {
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5em;
-            color: #ffb6c1; /* Subtle pink */
-            animation-delay: 0.5s;
-        }
-        h2 {
-            font-size: 1.8em;
-            color: #f5f5dc;
-            animation-delay: 1s;
-        }
-        h3 {
-            font-size: 1.5em;
-            color: #ffb6c1;
-            animation-delay: 1.5s;
-        }
+
+        /* --- Typography & Sections --- */
         p {
-            font-size: 1.2em;
-            animation-delay: 2s;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0; /* Hidden initially for animation */
+            transform: translateY(20px);
+            animation: fadeUp 1s ease-out forwards;
         }
-        .personal-line {
-            font-style: italic;
-            animation-delay: 2.5s;
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 500;
         }
-        .closing {
-            animation-delay: 3s;
+
+        .heading {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--accent-color);
+            letter-spacing: 1px;
         }
+
+        .spacer {
+            height: 2rem;
+        }
+
+        .signature {
+            margin-top: 3rem;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* --- Photo Gallery Styling --- */
         .photo-gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 40px;
+            grid-template-columns: repeat(2, 1fr); /* Mobile default: 2 cols */
+            gap: 1.5rem;
+            margin: 3rem 0;
             opacity: 0;
-            animation: fadeIn 1s ease-in-out 3.5s forwards;
+            animation: fadeUp 1.2s ease-out forwards;
+            animation-delay: 1.5s; /* Delays gallery until text is read */
         }
+
         .photo-gallery img {
             width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
-            transition: transform 0.3s ease;
+            height: 250px; /* Fixed height for uniformity */
+            object-fit: cover; /* Ensures photos fill the square without stretching */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            filter: brightness(0.9); /* Slightly dim for mood */
         }
+
+        /* Hover Effect */
         .photo-gallery img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(212, 165, 165, 0.2); /* Soft pink glow */
+            filter: brightness(1);
         }
+
+        /* --- Desktop Responsive --- */
         @media (min-width: 768px) {
             .photo-gallery {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr); /* Desktop: 4 cols */
+            }
+            
+            p {
+                font-size: 1.25rem;
             }
         }
-        @media (min-width: 1024px) {
-            .photo-gallery {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
+        /* Staggered Delays for Text */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.9s; }
+        .delay-3 { animation-delay: 1.6s; } /* Reflection */
+        .delay-4 { animation-delay: 2.3s; } /* Personal line */
+        .delay-5 { animation-delay: 3.0s; } /* Closing */
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Hi Hiyu 🌸</h1>
-        <p>It’s been a long time… and still, talking to you again feels calm and familiar.</p>
         
-        <h2>No expectations.</h2>
-        <h2>No pressure.</h2>
-        <p>Just two people talking again — and that feels nice.</p>
-        
-        <h3>I don’t know what this becomes, and that’s okay.</h3>
-        <p>Some connections don’t need labels to feel real.</p>
-        
-        <p class="personal-line">To me, you’ll always be Hiyu…<br>sometimes BKU…<br>and always someone I respect and care about.</p>
-        
-        <p class="closing">Happy Valentine’s Day 🤍<br>This isn’t a promise — just a warm smile, meant for you.</p>
-        
+        <p class="heading delay-1">
+            Hi Hiyu 🌸<br>
+            <span style="font-size: 1rem; color: var(--text-color); font-weight: 300; display: block; margin-top: 10px;">
+                It’s been a long time… and still, talking to you again feels calm and familiar.
+            </span>
+        </p>
+
+        <p class="delay-2">
+            No expectations.<br>
+            No pressure.<br>
+            Just two people talking again — and that feels nice.
+        </p>
+
+        <p class="delay-3">
+            I don’t know what this becomes, and that’s okay.<br>
+            Some connections don’t need labels to feel real.
+        </p>
+
         <div class="photo-gallery">
             <img src="https://i.ibb.co/27BBShc6/IMG-20260201-WA0001.jpg" alt="Hiyu photo 1">
             <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Hiyu photo 2">
+            <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Hiyu photo 3">
+            <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Hiyu photo 4">
+        </div>
+
+        <p class="delay-4">
+            To me, you’ll always be <span class="highlight">Hiyu</span>…<br>
+            sometimes <span class="highlight">BKU</span>…<br>
+            and always someone I respect and care about.
+        </p>
+
+        <div class="signature delay-5">
+            <p>
+                Happy Valentine’s Day 🤍<br>
+                <span style="font-size: 0.9rem; font-style: italic; color: #888;">This isn’t a promise — just a warm smile, meant for you.</span>
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Optional: Log purely for debugging
+            console.log("Page loaded smoothly.");
+        });
+    </script>
+</body>
+</html>            <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Hiyu photo 2">
             <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Hiyu photo 3">
             <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Hiyu photo 4">
         </div>
