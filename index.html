@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day, Hiyu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* Deep charcoal/black */
+            color: #f5f5dc; /* Beige */
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2, h3, p {
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #ffb6c1; /* Subtle pink */
+            animation-delay: 0.5s;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #f5f5dc;
+            animation-delay: 1s;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #ffb6c1;
+            animation-delay: 1.5s;
+        }
+        p {
+            font-size: 1.2em;
+            animation-delay: 2s;
+        }
+        .personal-line {
+            font-style: italic;
+            animation-delay: 2.5s;
+        }
+        .closing {
+            animation-delay: 3s;
+        }
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 3.5s forwards;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+        @media (min-width: 768px) {
+            .photo-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .photo-gallery {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi Hiyu 🌸</h1>
+        <p>It’s been a long time… and still, talking to you again feels calm and familiar.</p>
+        
+        <h2>No expectations.</h2>
+        <h2>No pressure.</h2>
+        <p>Just two people talking again — and that feels nice.</p>
+        
+        <h3>I don’t know what this becomes, and that’s okay.</h3>
+        <p>Some connections don’t need labels to feel real.</p>
+        
+        <p class="personal-line">To me, you’ll always be Hiyu…<br>sometimes BKU…<br>and always someone I respect and care about.</p>
+        
+        <p class="closing">Happy Valentine’s Day 🤍<br>This isn’t a promise — just a warm smile, meant for you.</p>
+        
+        <div class="photo-gallery">
+            <img src="https://i.ibb.co/27BBShc6/IMG-20260201-WA0001.jpg" alt="Hiyu photo 1">
+            <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Hiyu photo 2">
+            <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Hiyu photo 3">
+            <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Hiyu photo 4">
+        </div>
+    </div>
+    <script>
+        // Minimal JS for ensuring animations trigger on load
+        window.addEventListener('load', function() {
+            // No additional JS needed beyond CSS animations
+        });
+    </script>
+</body>
+</html>
