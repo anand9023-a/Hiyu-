@@ -3,192 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Hiyu</title>
+    <title>For Hiya</title>
     <style>
-        /* --- Reset & Base Variables --- */
+        /* --- Reset & Base Styles --- */
         :root {
-            --bg-color: #121212;      /* Deep charcoal/black */
-            --text-color: #E0E0E0;    /* Soft off-white */
-            --accent-color: #D4A5A5;  /* Dusty pink */
-            --card-bg: #1E1E1E;       /* Slightly lighter dark for contrast if needed */
-            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --bg-color: #0f0f10;       /* Very dark charcoal, almost black */
+            --text-main: #e0e0e0;      /* Soft white */
+            --text-muted: #a0a0a0;     /* Grey for secondary text */
+            --accent: #d4b8b1;         /* Muted dusty pink/beige */
+            --transition-speed: 1s;    /* Slow, cinematic transitions */
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        body {
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            line-height: 1.8;
-            min-height: 100vh;
+            color: var(--text-main);
+            overflow: hidden; /* Prevents scrolling */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Layout Container --- */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* --- Sections (Steps) --- */
+        .step {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centered */
+            width: 100%;
+            max-width: 500px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            padding: 2rem 1rem;
+            gap: 1.5rem;
         }
 
-        /* --- Container --- */
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
+        /* Active State */
+        .step.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%);
         }
 
-        /* --- Typography & Sections --- */
-        p {
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        /* Exiting State (Slide Up effect) */
+        .step.exit {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+        }
+
+        /* Initial State (Slide Down effect before appearing) */
+        .step:not(.active):not(.exit) {
+            transform: translate(-50%, -40%);
+        }
+
+        /* --- Typography --- */
+        h1, h2, p {
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+        }
+
+        .main-quote {
+            font-size: 1.25rem;
             font-weight: 300;
-            opacity: 0; /* Hidden initially for animation */
-            transform: translateY(20px);
-            animation: fadeUp 1s ease-out forwards;
+            color: var(--text-main);
+            border-left: 1px solid var(--accent);
+            padding-left: 20px;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .text-block {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 300;
         }
 
         .highlight {
-            color: var(--accent-color);
-            font-weight: 500;
+            color: var(--accent);
+            font-weight: 400;
         }
 
-        .heading {
-            font-size: 1.5rem;
-            margin-bottom: 2.5rem;
-            color: var(--accent-color);
-            letter-spacing: 1px;
+        .final-text {
+            font-size: 1.1rem;
+            margin-top: 1rem;
         }
 
-        .spacer {
-            height: 2rem;
-        }
-
-        .signature {
-            margin-top: 3rem;
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        /* --- Photo Gallery Styling --- */
+        /* --- Photo Gallery --- */
         .photo-gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Mobile default: 2 cols */
-            gap: 1.5rem;
-            margin: 3rem 0;
-            opacity: 0;
-            animation: fadeUp 1.2s ease-out forwards;
-            animation-delay: 1.5s; /* Delays gallery until text is read */
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            aspect-ratio: 1 / 0.8; /* Keeps gallery relatively compact */
+            margin-bottom: 1rem;
         }
 
         .photo-gallery img {
             width: 100%;
-            height: 250px; /* Fixed height for uniformity */
-            object-fit: cover; /* Ensures photos fill the square without stretching */
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            filter: brightness(0.9); /* Slightly dim for mood */
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            filter: brightness(0.9) contrast(1.1); /* Cinematic look */
+            transition: transform 0.5s ease;
         }
-
-        /* Hover Effect */
+        
+        /* Subtle zoom on hover/touch */
         .photo-gallery img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 25px rgba(212, 165, 165, 0.2); /* Soft pink glow */
+            transform: scale(1.02);
             filter: brightness(1);
         }
 
-        /* --- Desktop Responsive --- */
-        @media (min-width: 768px) {
-            .photo-gallery {
-                grid-template-columns: repeat(4, 1fr); /* Desktop: 4 cols */
-            }
-            
-            p {
-                font-size: 1.25rem;
-            }
+        /* --- Button Styling --- */
+        .btn-next {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 14px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-next:hover {
+            background: rgba(212, 184, 177, 0.1);
+            letter-spacing: 3px;
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
         }
 
         /* --- Animations --- */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        /* Staggered Delays for Text */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.9s; }
-        .delay-3 { animation-delay: 1.6s; } /* Reflection */
-        .delay-4 { animation-delay: 2.3s; } /* Personal line */
-        .delay-5 { animation-delay: 3.0s; } /* Closing */
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <p class="heading delay-1">
-            Hi Hiyu 🌸<br>
-            <span style="font-size: 1rem; color: var(--text-color); font-weight: 300; display: block; margin-top: 10px;">
-                It’s been a long time… and still, talking to you again feels calm and familiar.
-            </span>
-        </p>
+<div class="container">
 
-        <p class="delay-2">
-            No expectations.<br>
-            No pressure.<br>
-            Just two people talking again — and that feels nice.
-        </p>
-
-        <p class="delay-3">
-            I don’t know what this becomes, and that’s okay.<br>
-            Some connections don’t need labels to feel real.
-        </p>
-
-        <div class="photo-gallery">
-            <img src="https://i.ibb.co/27BBShc6/IMG-20260201-WA0001.jpg" alt="Hiyu photo 1">
-            <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Hiyu photo 2">
-            <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Hiyu photo 3">
-            <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Hiyu photo 4">
+    <section id="step-1" class="step active">
+        <div class="main-quote">
+            “Some people don’t disappear.<br>
+            They just stop talking for a while.”
         </div>
+        <button class="btn-next" onclick="nextStep(1)">Continue</button>
+    </section>
 
-        <p class="delay-4">
+    <section id="step-2" class="step">
+        <p class="text-block">
+            We didn’t plan this.<br>
+            Time passed, life changed.<br>
+            And somehow, we’re talking again.
+        </p>
+        <p class="text-block">
+            I’m not trying to fix the past.<br>
+            I just like how <span class="highlight">calm</span> this feels now.
+        </p>
+        <button class="btn-next" onclick="nextStep(2)">Go on</button>
+    </section>
+
+    <section id="step-3" class="step">
+        <div class="photo-gallery">
+            <img src="https://i.ibb.co/27BBShc6/IMG-20260201-WA0001.jpg" alt="Memory 1">
+            <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Memory 2">
+            <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Memory 3">
+            <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Memory 4">
+        </div>
+        <p class="text-block" style="font-size: 0.95rem;">
+            I don’t know what this becomes.<br>
+            And honestly, that’s okay.
+        </p>
+        <p class="text-block" style="font-size: 0.95rem;">
+            Some connections don’t need labels<br>
+            to feel real.
+        </p>
+        <button class="btn-next" onclick="nextStep(3)">One last thing</button>
+    </section>
+
+    <section id="step-4" class="step">
+        <p class="text-block final-text">
             To me, you’ll always be <span class="highlight">Hiyu</span>…<br>
             sometimes <span class="highlight">BKU</span>…<br>
-            and always someone I respect and care about.
+            and always someone I respect.
         </p>
+        <div style="width: 50px; height: 1px; background: var(--accent); margin: 20px 0;"></div>
+        <p class="text-block" style="color: var(--text-main);">
+            Happy Valentine’s Day 🤍
+        </p>
+        <p class="text-block" style="font-size: 0.85rem; opacity: 0.7;">
+            Not a promise.<br>
+            Just something real, from me.
+        </p>
+    </section>
 
-        <div class="signature delay-5">
-            <p>
-                Happy Valentine’s Day 🤍<br>
-                <span style="font-size: 0.9rem; font-style: italic; color: #888;">This isn’t a promise — just a warm smile, meant for you.</span>
-            </p>
-        </div>
+</div>
 
-    </div>
+<script>
+    function nextStep(currentStepIndex) {
+        // Select the current step and the next step
+        const currentStep = document.getElementById(`step-${currentStepIndex}`);
+        const nextStep = document.getElementById(`step-${currentStepIndex + 1}`);
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Optional: Log purely for debugging
-            console.log("Page loaded smoothly.");
-        });
-    </script>
-</body>
-</html>            <img src="https://i.ibb.co/Y7NdRYDy/IMG-20260201-WA0002.jpg" alt="Hiyu photo 2">
-            <img src="https://i.ibb.co/b5BKTzKW/609162591-17993094644886772-5708284967884127110-n.jpg" alt="Hiyu photo 3">
-            <img src="https://i.ibb.co/Q7LV2Z8y/file-000000002ad85243b840fc62d468b0bc-conversation-id-67e8b3d1-2f34-8005-8d94-7c598d7e8be4-message-i.png" alt="Hiyu photo 4">
-        </div>
-    </div>
-    <script>
-        // Minimal JS for ensuring animations trigger on load
-        window.addEventListener('load', function() {
-            // No additional JS needed beyond CSS animations
-        });
-    </script>
+        // Add 'exit' class to current step to trigger slide-up animation
+        currentStep.classList.remove('active');
+        currentStep.classList.add('exit');
+
+        // Wait slightly for the animation to start, then bring in the next step
+        setTimeout(() => {
+            if (nextStep) {
+                nextStep.classList.add('active');
+            }
+        }, 600); // 600ms delay ensures the first one is fading out before the next appears
+    }
+</script>
+
 </body>
 </html>
